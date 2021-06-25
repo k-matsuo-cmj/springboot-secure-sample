@@ -21,7 +21,7 @@
    DB のユーザー情報の定義  
 
    - エンティティクラス名は「User」にしないほうが無難
-   - リポジトリには「findByName」メソッドを定義しておく（UserDetailsService が使用する）
+   - リポジトリには「findByUsername」メソッドを定義しておく（UserDetailsService が使用する）
 
 4. HTML テンプレート(resources/templates)  
    Thymeleaf の機能でログインの有無や権限による判定が可能（表示の切り替えができる）
