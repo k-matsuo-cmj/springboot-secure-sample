@@ -13,6 +13,11 @@
   <div sec:authentication="principal">
     Authentication.getPrincipal()
   </div>
+  <!-- ユーザIDとEMail -->
+  <div sec:authorize="isAuthenticated()">
+    <p sec:authentication="principal.userId"></p>
+    <p sec:authentication="principal.email"></p>
+  </div>
   <br>
   <div sec:authorize="hasRole('ADMIN')">
     you are admin!

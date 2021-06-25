@@ -1,16 +1,12 @@
 package jp.co.cybermissions.itspj.java.securedemo.service;
 
-import java.util.HashSet;
-import java.util.Set;
-
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import jp.co.cybermissions.itspj.java.securedemo.model.CustomUser;
+import jp.co.cybermissions.itspj.java.securedemo.model.CustomUserDetailsImpl;
 import jp.co.cybermissions.itspj.java.securedemo.model.CustomUserRepository;
 import lombok.RequiredArgsConstructor;
 
@@ -37,18 +33,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
       throw new UsernameNotFoundException(username + " not found.");
     }
     // UserDetailsオブジェクトを作成
-    return createUserDetails(user);
-  }
-
-  private UserDetails createUserDetails(CustomUser user) {
-    // ユーザー名
-    String username = user.getUsername();
-    // パスワード
-    String password = user.getPassword();
-    // 権限
-    Set<GrantedAuthority> authSet = new HashSet<>();
-    authSet.add(new SimpleGrantedAuthority(user.getRole()));
-
-    return new org.springframework.security.core.userdetails.User(username, password, authSet);
+    // カスタム実装クラスを使用
+    return new CustomUserDetailsImpl(user);
   }
 }
