@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>一般公開ページ</title>
+</head>
+
+<body>
+  <h1>認証していなくても表示できるページです</h1>
+  <div sec:authentication="principal">
+    Authentication.getPrincipal()
+  </div>
+  <br>
+  <div sec:authorize="hasRole('ADMIN')">
+    you are admin!
+  </div>
+  <div th:unless="${#authorization.expression('hasRole(''ADMIN'')')}">
+    you are not admin...
+  </div>
+  <br>
+  <a th:href="@{/sec}">会員専用ページへ</a>
+  <div sec:authorize="isAuthenticated()">
+    <a th:href="@{/logout}">ログアウト</a>
+  </div>
+</body>
+
+</html>
